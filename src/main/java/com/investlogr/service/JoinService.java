@@ -23,11 +23,13 @@ public class JoinService {
             return;
         }
 
-        User user = new User();
+        User user = User.builder()
+                .username(username)
+                .password(bCryptPasswordEncoder.encode(password))
+                .role("ROLE_ADMIN")
+                .nickname(username)
+                .build();
 
-        user.setUsername(username);
-        user.setPassword(bCryptPasswordEncoder.encode(password));
-        user.setRole("ROLE_ADMIN");
 
         userRepository.save(user);
     }

@@ -21,9 +21,9 @@ class UserRepositoryTest {
     @Test
     public void findByUsernameTest(){
 
-        User user = repository.findByUsername("admin");
+        User user = repository.findByUsername("admin").orElseThrow();
 
-        Assertions.assertNull(user);
+        assertNotNull(user);
 
     }
 
