@@ -14,6 +14,7 @@ public class TradingRecordDTO {
 
     private String content;
 
+    private Boolean isBuy;
 
     private Boolean isUSD;
 

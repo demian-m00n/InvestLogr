@@ -12,7 +12,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -32,6 +31,7 @@ public class TradingRecordServiceImpl implements TradingRecordService{
         TradingRecord tradingRecord = TradingRecord.builder()
                 .price(tradingRecordDTO.getPrice())
                 .content(tradingRecordDTO.getContent())
+                .isBuy(tradingRecordDTO.getIsBuy())
                 .isUSD(tradingRecordDTO.getIsUSD())
                 .tradingDate(tradingRecordDTO.getTradingDate())
                 .quantity(tradingRecordDTO.getQuantity())
@@ -48,9 +48,10 @@ public class TradingRecordServiceImpl implements TradingRecordService{
     public List<TradingRecordDTO> readAllTradingRecords(String username) {
         User user = userRepository.findByUsername(username).orElseThrow();
         return tradingRecordRepository.findTradingRecordsByUser(user).stream().map((r) ->
-            TradingRecordDTO.builder()
+             TradingRecordDTO.builder()
                 .isinCode(r.getAsset().getIsinCode())
                 .content(r.getContent())
+                .isBuy(r.getIsBuy())
                 .isUSD(r.getIsUSD())
                 .price(r.getPrice())
                 .quantity(r.getQuantity())
@@ -65,6 +66,7 @@ public class TradingRecordServiceImpl implements TradingRecordService{
         return TradingRecordDTO.builder()
                 .isinCode(tradingRecord.getAsset().getIsinCode())
                 .content(tradingRecord.getContent())
+                .isBuy(tradingRecord.getIsBuy())
                 .isUSD(tradingRecord.getIsUSD())
                 .price(tradingRecord.getPrice())
                 .quantity(tradingRecord.getQuantity())
@@ -82,10 +84,11 @@ public class TradingRecordServiceImpl implements TradingRecordService{
         TradingRecord tradingRecord = tradingRecordRepository.findById(id).orElseThrow();
 
         TradingRecord updatedTradingRecord = TradingRecord.builder()
-                .tradingRecordId(tradingRecord.getTradingRecordId())
+                .tradingRecordId(id)
                 .price(tradingRecordDTO.getPrice())
                 .content(tradingRecordDTO.getContent())
                 .isUSD(tradingRecordDTO.getIsUSD())
+                .isBuy(tradingRecordDTO.getIsBuy())
                 .tradingDate(tradingRecordDTO.getTradingDate())
                 .quantity(tradingRecordDTO.getQuantity())
                 .regDate(tradingRecord.getRegDate())

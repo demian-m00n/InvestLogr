@@ -29,6 +29,8 @@ public class TradingRecord {
 
     private Boolean isUSD;
 
+    private Boolean isBuy;
+
     private Double price;
 
     private Double quantity;
