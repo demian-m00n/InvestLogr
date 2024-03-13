@@ -40,9 +40,11 @@ public class TradingRecordController {
     }
 
     @GetMapping(value = "/tradingrecords",consumes = MediaType.APPLICATION_JSON_VALUE)
-    public List<TradingRecordDTO> list(Authentication authentication){
+    public List<TradingRecordDTO> list(@RequestParam(defaultValue = "ALL") String isinCode,
+                                       Authentication authentication){
         String username = authentication.getName();
-        return tradingRecordService.readAllTradingRecords(username);
+        if(isinCode.equals("ALL")) return tradingRecordService.readAllTradingRecords(username);
+        return tradingRecordService.readAllTradingRecordsAboutAsset(username,isinCode);
     }
 
 }

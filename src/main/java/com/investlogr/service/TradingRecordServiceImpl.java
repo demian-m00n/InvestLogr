@@ -26,7 +26,7 @@ public class TradingRecordServiceImpl implements TradingRecordService{
     @Override
     public TradingRecord createTradingRecord(TradingRecordDTO tradingRecordDTO,String username) {
         User user = userRepository.findByUsername(username).orElseThrow();
-        Asset asset = assetRepository.findByIsinCode(tradingRecordDTO.getIsinCode());
+        Asset asset = assetRepository.findByIsinCode(tradingRecordDTO.getIsinCode()).orElseThrow();
 
         TradingRecord tradingRecord = TradingRecord.builder()
                 .price(tradingRecordDTO.getPrice())
@@ -100,5 +100,21 @@ public class TradingRecordServiceImpl implements TradingRecordService{
         tradingRecordRepository.save(updatedTradingRecord);
 
         return tradingRecordDTO;
+    }
+
+    @Override
+    public List<TradingRecordDTO> readAllTradingRecordsAboutAsset(String username, String isinCode) {
+        User user = userRepository.findByUsername(username).orElseThrow();
+        Asset asset = assetRepository.findByIsinCode(isinCode).orElseThrow();
+        return tradingRecordRepository.findTradingRecordsByUserAndAsset(user,asset).stream().map((r) ->
+                TradingRecordDTO.builder()
+                        .isinCode(r.getAsset().getIsinCode())
+                        .content(r.getContent())
+                        .isBuy(r.getIsBuy())
+                        .isUSD(r.getIsUSD())
+                        .price(r.getPrice())
+                        .quantity(r.getQuantity())
+                        .tradingDate(r.getTradingDate())
+                        .build()).collect(Collectors.toList());
     }
 }

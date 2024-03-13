@@ -13,4 +13,6 @@ public interface TradingRecordService {
     void deleteTradingRecord(Long id);
     TradingRecordDTO updateTradingRecord(Long id,TradingRecordDTO tradingRecordDTO);
 
+    List<TradingRecordDTO> readAllTradingRecordsAboutAsset(String username,String isinCode);
+
 }
