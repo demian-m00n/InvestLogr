@@ -19,6 +19,18 @@ class UserRepositoryTest {
     private UserRepository repository;
 
     @Test
+    public void registerUserTest(){
+        User user = User.builder()
+                .username("admin")
+                .password("password")
+                .nickname("nickname")
+                .role("ROLE_ADMIN")
+                .build();
+
+        repository.save(user);
+    }
+
+    @Test
     public void findByUsernameTest(){
 
         User user = repository.findByUsername("admin").orElseThrow();

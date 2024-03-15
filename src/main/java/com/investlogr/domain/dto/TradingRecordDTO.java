@@ -1,5 +1,6 @@
 package com.investlogr.domain.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.investlogr.domain.entity.Asset;
 import lombok.*;
 
@@ -20,6 +21,7 @@ public class TradingRecordDTO {
 
     private Double quantity;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "Asia/Seoul")
     private LocalDateTime tradingDate;
 
     private String isinCode;

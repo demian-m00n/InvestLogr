@@ -26,5 +26,15 @@ public class User {
 
     private String role;
 
-    private String nickname;
+    private String email;
+
+    private String name;
+
+    public void setEmail(String email){
+        this.email = email;
+    }
+
+    public void setName(String name){
+        this.name = name;
+    }
 }

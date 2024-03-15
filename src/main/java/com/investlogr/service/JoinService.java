@@ -27,7 +27,7 @@ public class JoinService {
                 .username(username)
                 .password(bCryptPasswordEncoder.encode(password))
                 .role("ROLE_ADMIN")
-                .nickname(username)
+                .name(username)
                 .build();
 
 
