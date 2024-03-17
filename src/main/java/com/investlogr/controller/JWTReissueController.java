@@ -87,10 +87,11 @@ public class JWTReissueController {
     private void addRefreshToken(String username, String refresh, Long expiredMs){
         Date date = new Date(System.currentTimeMillis() + expiredMs);
 
-        RefreshToken refreshToken = new RefreshToken();
-        refreshToken.setUsername(username);
-        refreshToken.setRefresh(refresh);
-        refreshToken.setExpiration(date.toString());
+        RefreshToken refreshToken = RefreshToken.builder()
+                .username(username)
+                .refresh(refresh)
+                .expiration(date.toString())
+                .build();
 
         refreshTokenRepository.save(refreshToken);
     }

@@ -26,7 +26,7 @@ public class JoinService {
         User user = User.builder()
                 .username(username)
                 .password(bCryptPasswordEncoder.encode(password))
-                .role("ROLE_ADMIN")
+                .role("ROLE_USER")
                 .name(username)
                 .build();
 
