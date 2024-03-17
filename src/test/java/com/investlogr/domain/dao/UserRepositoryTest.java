@@ -23,7 +23,7 @@ class UserRepositoryTest {
         User user = User.builder()
                 .username("admin")
                 .password("password")
-                .nickname("nickname")
+                .name("name")
                 .role("ROLE_ADMIN")
                 .build();
 
