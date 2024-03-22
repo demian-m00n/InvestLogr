@@ -61,7 +61,7 @@ public class SecurityConfig {
         http
                 .httpBasic((auth) -> auth.disable());
 
-        //ouath2
+        //oauth2
         http
                 .oauth2Login((oauth2) -> oauth2
                         .userInfoEndpoint((userInfoEndpointConfig -> userInfoEndpointConfig

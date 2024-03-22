@@ -1,5 +1,6 @@
 package com.investlogr.security;
 
+import com.investlogr.domain.Role;
 import com.investlogr.domain.entity.User;
 import com.investlogr.util.JWTUtil;
 import io.jsonwebtoken.ExpiredJwtException;
@@ -76,7 +77,7 @@ public class JWTFilter extends OncePerRequestFilter {
         //User 를 생성 후 값을 Set
         User user = User.builder()
                 .username(username)
-                .role(role)
+                .role(Role.valueOf(role))
                 .build();
 
         //UserDetails 에 회원 객체 정보 담기

@@ -1,5 +1,6 @@
 package com.investlogr.security;
 
+import com.investlogr.domain.Role;
 import com.investlogr.domain.dao.UserRepository;
 import com.investlogr.domain.dto.GoogleResponse;
 import com.investlogr.domain.dto.NaverResponse;
@@ -48,7 +49,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
                     .username(username)
                     .email(oAuth2Response.getEmail())
                     .name(oAuth2Response.getName())
-                    .role("ROLE_USER")
+                    .role(Role.ROLE_USER)
                     .password("")
                     .build();
 
@@ -71,7 +72,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
             UserDTO userDTO = new UserDTO();
             userDTO.setUsername(existData.getUsername());
             userDTO.setName(oAuth2Response.getName());
-            userDTO.setRole(existData.getRole());
+            userDTO.setRole(existData.getRole().toString());
 
             return new CustomOAuth2User(userDTO);
         }
